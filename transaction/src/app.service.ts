@@ -6,10 +6,16 @@ import { Transaction, TransactionDocument } from './transaction.schema';
 @Injectable()
 export class AppService {
   constructor(
-    @InjectModel(Transaction.name) private transactionModel: Model<TransactionDocument>,
+    @InjectModel(Transaction.name)
+    private transactionModel: Model<TransactionDocument>,
   ) {}
 
-  async createTransaction(data: { userId: string; amount: number; type: string; date: string }): Promise<Transaction> {
+  async createTransaction(data: {
+    userId: string;
+    amount: number;
+    type: string;
+    date: string;
+  }): Promise<Transaction> {
     const newTransaction = new this.transactionModel(data);
     return newTransaction.save();
   }

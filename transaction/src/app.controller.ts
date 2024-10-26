@@ -7,7 +7,12 @@ export class AppController {
   constructor(private readonly appSerivce: AppService) {}
 
   @GrpcMethod('TransactionService', 'CreateTransaction')
-  async createTransaction(data: { userId: string; amount: number; type: string; date: string }) {
+  async createTransaction(data: {
+    userId: string;
+    amount: number;
+    type: string;
+    date: string;
+  }) {
     const transaction = await this.appSerivce.createTransaction({
       userId: data.userId,
       amount: data.amount,
@@ -27,7 +32,9 @@ export class AppController {
 
   @GrpcMethod('TransactionService', 'GetTransactionsByUser')
   async getTransactionsByUser(data: { userId: string }) {
-    const transactions = await this.appSerivce.getTransactionsByUser(data.userId);
+    const transactions = await this.appSerivce.getTransactionsByUser(
+      data.userId,
+    );
 
     return {
       transactions: transactions.map((transaction) => ({
