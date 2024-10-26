@@ -11,7 +11,6 @@ export class AppController {
     const { email } = data;
     if (!email) throw new Error('Email is required');
     const user = await this.appService.getUser(email)
-    console.log({user})
     return user
 }
 
